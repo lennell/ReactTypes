@@ -1,24 +1,25 @@
+import React, {useState, useEffect} from 'react'
 import './App.css'
+import Message from './Message'
 
-function App() {
-  // Tuple
-  // const aTuple: [string, number] = ['Manny', 34]
-  // enum
-  // enum Codes {first = 1, second = 2}
-  // any
-  // const notSure: any = '3';
-  // void
-  // const warning = (): void => {
-  //   console.log('Warning')
-  // }
+const App: React.FC = () => {
+
+    const[userName, setUserName] = useState<string>('Manny');
+    const[userMessage, setUserMessage] = useState<string>('Hello there hej!');
+
+    useEffect(() => {
+        const timer = setTimeout( () =>  {
+            setUserName('Manny');
+            setUserMessage('Hello there with Typescript!');
+        },5000);
+        return () => clearTimeout(timer);
+    }, []);
 
   return (
-    <>
+    <div>
       <h1>Typescript is cool</h1>
-      <p className="read-the-docs">
-        The value {notSure} is of {typeof notSure} type!
-      </p>
-    </>
+       <Message name={userName} message={userMessage} />
+    </div>
   )
 }
 
